@@ -5,7 +5,7 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 { 
     public Terrain TerrainMain;
-    public int size = 1025;
+    public int size = 513;
     public float[,] heights;
     public SplatHeights1[] splatHeights1;
     [System.Serializable]
