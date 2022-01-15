@@ -43,11 +43,21 @@ public class TerrainGenerator : MonoBehaviour
     public float Hsize2;
     private int ColorGen;
     private int HeightGen;
+
+
+    public Biome1[] biome1;
+    [System.Serializable]
+    public class Biome1
+    {
+        public int Hight;
+        public GameObject[] obj;
+    }
     void Start()
     {
         CreateTexure();
         SetTerrainHeights();
         PaintTerrain();
+        CreateTrees();
     }
     public void SetTerrainHeights()
     {
@@ -163,5 +173,40 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
         tex.Apply();
+    }
+    public void CreateTrees()
+    {
+        TerrainData terrainData = TerrainMain.terrainData;
+        for (int y = 0; y < terrainData.alphamapHeight; y++)
+        {
+            for (int x = 0; x < terrainData.alphamapWidth; x++)
+            {
+                Color pixel = tex.GetPixel(y, x);
+                float terrainHeight = terrainData.GetHeight(x, y);
+                if (pixel.r > 0.8f)
+                {
+                    for (int i = 0; i < biome1.Length; i++)
+                    {
+                        if (biome1[i].obj.Length != 0)
+                        {
+                            if (i == biome1.Length - 1 && terrainHeight >= biome1[i].Hight)
+                            {
+                                if (Random.Range(0, 25) == 0)
+                                {
+                                    Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)], new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                }
+                            }
+                            else if (terrainHeight >= biome1[i].Hight && terrainHeight <= biome1[i + 1].Hight)
+                            {
+                                if (Random.Range(0, 25) == 0)
+                                {
+                                    Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)], new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

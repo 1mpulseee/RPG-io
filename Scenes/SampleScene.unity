@@ -185,6 +185,13 @@ MonoBehaviour:
   powH2: 2
   Hsize: 0.2
   Hsize2: 0.1
+  biome1:
+  - Hight: 0
+    obj: []
+  - Hight: 117
+    obj:
+    - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
+    - {fileID: 182382, guid: 76be61eeff2e7164cb99e1cf8cf0c22b, type: 3}
 --- !u!154 &100298526
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -237,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100298524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -500, y: 0, z: -500}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -426,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765400513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 115, z: 0}
+  m_LocalPosition: {x: 500, y: 115, z: 500}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -534,7 +541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1189219937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +571,7 @@ MonoBehaviour:
   powH2: 4
   Hsize: 0.2
   Hsize2: 0.25
+  biome1: []
 --- !u!64 &1189219938
 MeshCollider:
   m_ObjectHideFlags: 0
