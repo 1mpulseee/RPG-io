@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class selector : MonoBehaviour
 {
-    public move main;
+    public FirstPersonController main;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "tree")
