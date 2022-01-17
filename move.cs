@@ -15,6 +15,14 @@ public class move : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        // Checks if player is walking and isGrounded
+        // Will allow head bob
+        if (targetVelocity.x != 0 || targetVelocity.z != 0)
+        {
+            Vector3 dir = Vector3.RotateTowards(transform.forward, targetVelocity, 10, 0.0f);
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
         Vector3 inputs = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         rb.AddRelativeForce(inputs * speed);
 
