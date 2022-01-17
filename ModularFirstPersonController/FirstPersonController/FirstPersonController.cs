@@ -163,6 +163,8 @@ public class FirstPersonController : MonoBehaviour
     {
         objs.Remove(obj);
     }
+
+    //эти 2 метода вызываются через анимации
     public void startAttack()
     {
         IsAttack = true;
