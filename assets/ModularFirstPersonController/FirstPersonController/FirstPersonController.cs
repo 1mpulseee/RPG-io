@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public int woodCount;
+    public int stoneCount;
+
+
     private Quaternion needRot;
     private Quaternion oldRot;
     public float RotSpeed = 0.1f;
@@ -69,6 +73,8 @@ public class FirstPersonController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
         needRot = transform.rotation;
+        modules.parent = null;
+        selector.parent = null;
     }
 
     private void Update()

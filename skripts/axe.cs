@@ -20,7 +20,21 @@ public class axe : MonoBehaviour
         {
             if (other.CompareTag("tree"))
             {
-                Debug.Log("удар по дереву");
+                if (other.GetComponentInParent<resource>().ready == true)
+                {
+                    other.GetComponentInParent<resource>().felling(axeParamerts.lvl);
+                    if (other.GetComponentInParent<resource>().treeInfo.ToolLvl <= axeParamerts.lvl)
+                    {
+                        switch (other.GetComponentInParent<resource>().treeInfo.type)
+                        {
+                            case "tree":
+                                main.woodCount += axeParamerts.damage;
+                                break;
+                        }
+                    }
+                }
+                other.GetComponentInParent<resource>().ready = false;
+                other.GetComponentInParent<resource>().FixAttack();
             }
         }
     }
