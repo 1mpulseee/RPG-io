@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
 public class TerrainGenerator : MonoBehaviour
 { 
@@ -195,16 +196,16 @@ public class TerrainGenerator : MonoBehaviour
                         {
                             if (i == biome1.Length - 1 && terrainHeight >= biome1[i].Hight)
                             {
-                                if (Random.Range(0, 25) == 0)
+                                if (Random.Range(0, 100) == 0)
                                 {
-                                    Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)], new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                    PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
                                 }
                             }
                             else if (terrainHeight >= biome1[i].Hight && terrainHeight <= biome1[i + 1].Hight)
                             {
-                                if (Random.Range(0, 25) == 0)
+                                if (Random.Range(0, 100) == 0)
                                 {
-                                    Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)], new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                    PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
                                 }
                             }
                         }

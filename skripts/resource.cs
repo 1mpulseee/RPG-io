@@ -16,7 +16,9 @@ public class resource : MonoBehaviour
     [System.Serializable]
     public class TreeInfo
     {
-        public string type;
+        [System.Serializable] public enum DropDown { tree, stone}
+
+        [SerializeField] public DropDown type;
         public int ToolLvl;
         [HideInInspector]
         public int stage = 0;

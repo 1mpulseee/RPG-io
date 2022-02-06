@@ -25,7 +25,7 @@ public class axe : MonoBehaviour
                     other.GetComponentInParent<resource>().felling(axeParamerts.lvl);
                     if (other.GetComponentInParent<resource>().treeInfo.ToolLvl <= axeParamerts.lvl)
                     {
-                        switch (other.GetComponentInParent<resource>().treeInfo.type)
+                        switch (other.GetComponentInParent<resource>().treeInfo.type.ToString())
                         {
                             case "tree":
                                 main.woodCount += axeParamerts.damage;

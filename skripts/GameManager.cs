@@ -8,6 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject PlayerPrefab;
     void Start()
     {
-        GameObject player = PhotonNetwork.Instantiate(PlayerPrefab.name, transform.position, transform.rotation);
+        PhotonNetwork.Instantiate(PlayerPrefab.name, transform.position, transform.rotation);
     }
 }

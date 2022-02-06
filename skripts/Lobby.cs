@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Lobby : MonoBehaviourPunCallbacks
 {
+    [System.Serializable] public enum DropDown { MainScene, test }
+
+    [SerializeField] public DropDown scene;
     void Start()
     {
         PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999); //�������
@@ -32,6 +35,6 @@ public class Lobby : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("test");
+        PhotonNetwork.LoadLevel(scene.ToString());
     }
 }
