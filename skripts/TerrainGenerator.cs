@@ -5,7 +5,8 @@ using UnityEngine.AI;
 using Photon.Pun;
 
 public class TerrainGenerator : MonoBehaviour
-{ 
+{
+    private PhotonView PV;
     public Terrain TerrainMain;
     public int size = 513;
     public float[,] heights;
@@ -43,8 +44,8 @@ public class TerrainGenerator : MonoBehaviour
     public float powH2;
     public float Hsize;
     public float Hsize2;
-    private int ColorGen;
-    private int HeightGen;
+    private int ColorGen = 0;
+    private int HeightGen = 0;
 
 
     public Biome1[] biome1;
@@ -58,15 +59,36 @@ public class TerrainGenerator : MonoBehaviour
     public NavMeshSurface[] surfaces;
     void Start()
     {
-        CreateTexure();
-        SetTerrainHeights();
-        PaintTerrain();
-        CreateTrees();
-        generateNavMesh();
+        PV = GetComponent<PhotonView>();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            HeightGen = Random.Range(1, 1000);
+            ColorGen = Random.Range(1, 1000);
+
+            CreateTexure();
+            SetTerrainHeights();
+            PaintTerrain();
+            CreateTrees();
+            generateNavMesh();
+        }
+        else
+        {
+            if (ColorGen != 0 && HeightGen != 0)
+            {
+                CreateTexure();
+                SetTerrainHeights();
+                PaintTerrain();
+                generateNavMesh();
+            }
+            else
+            {
+                PV.RPC("GetInfo", RpcTarget.MasterClient);
+                Invoke("Start", 0);
+            } 
+        }
     }
     public void SetTerrainHeights()
-    {
-        HeightGen = Random.Range(1, 1000);
+    {  
         heights = TerrainMain.terrainData.GetHeights(0, 0, size, size);
         for (int x = 0; x < size; x++)
         {
@@ -151,7 +173,6 @@ public class TerrainGenerator : MonoBehaviour
     }
     public void CreateTexure()
     {
-        ColorGen = Random.Range(1, 1000);
         tex = new Texture2D(size, size);
 
         for (int x = 0; x < size; x++)
@@ -196,14 +217,14 @@ public class TerrainGenerator : MonoBehaviour
                         {
                             if (i == biome1.Length - 1 && terrainHeight >= biome1[i].Hight)
                             {
-                                if (Random.Range(0, 100) == 0)
+                                if (Random.Range(0, 25) == 0)
                                 {
                                     PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
                                 }
                             }
                             else if (terrainHeight >= biome1[i].Hight && terrainHeight <= biome1[i + 1].Hight)
                             {
-                                if (Random.Range(0, 100) == 0)
+                                if (Random.Range(0, 25) == 0)
                                 {
                                     PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
                                 }
@@ -220,5 +241,19 @@ public class TerrainGenerator : MonoBehaviour
         {
             surfaces[i].BuildNavMesh();
         }
+    }
+    [PunRPC]
+    public void GetInfo()
+    {
+        if (ColorGen != 0 && HeightGen != 0)
+        {
+            PV.RPC("SetInfo", RpcTarget.Others, HeightGen, ColorGen);
+        }
+    }
+    [PunRPC]
+    public void SetInfo(int H, int C)
+    {
+        HeightGen = H;
+        ColorGen = C;
     }
 }

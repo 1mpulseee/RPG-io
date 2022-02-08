@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - changeResource
   - effects
+  - SetOnlineEvent
+  - GetInfo
+  - SetInfo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

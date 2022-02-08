@@ -11,6 +11,7 @@ public class Lobby : MonoBehaviourPunCallbacks
     [SerializeField] public DropDown scene;
     void Start()
     {
+        //Debug.Log(PhotonNetwork.MAX_VIEW_IDS);
         PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999); //�������
         //Log("Player name: " + PhotonNetwork.NickName);
         //Log("Loading server...");
