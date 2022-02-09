@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+    AnimSyns AnimSyns;
     public int woodCount;
     public int stoneCount;
 
@@ -61,6 +62,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
+        AnimSyns = GetComponent<AnimSyns>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         jointOriginalPos = joint.localPosition;
@@ -148,7 +150,8 @@ public class FirstPersonController : MonoBehaviour
             if (time > coolDown)
             {
                 time = 0;
-                anim.SetTrigger("axe");
+                AnimSyns.SetAnimTrigger("axe");
+                //anim.SetTrigger("axe");
             }
         }
         else
