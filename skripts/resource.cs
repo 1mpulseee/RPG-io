@@ -65,12 +65,13 @@ public class resource : MonoBehaviour
     }
     public void resourceRecovery()
     {
-        treeInfo.stage--;
-        if (treeInfo.stage < 0)
-        {
+        //treeInfo.stage--;
+        //if (treeInfo.stage < 0)
+        //{
             treeInfo.stage = 0;
-        }
+        //}
         PV.RPC("changeResource", RpcTarget.All, treeInfo.stage);
+        CancelInvoke();
     }
     [PunRPC]
     public void changeResource(int stage)
