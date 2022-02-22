@@ -93,7 +93,7 @@ MonoBehaviour:
     - {fileID: 3108527272197449047}
     - {fileID: 3108527272867528930}
     - {fileID: 3108527272265154826}
-  resourceRecoveryTime: 15
+  resourceRecoveryTime: 90
   effect: {fileID: 3108527273146925328}
   sound: {fileID: 3108527273785947607}
 --- !u!65 &3108527273785947604
