@@ -10,51 +10,40 @@ public class TerrainGenerator : MonoBehaviour
     public Terrain TerrainMain;
     public int size = 513;
     public float[,] heights;
-    public SplatHeights1[] splatHeights1;
+    public int[,] Biomes = new int[1000, 1000] ;
+    
+    public biomeGen[] BiomeGen;
     [System.Serializable]
-    public class SplatHeights1
+    public class biomeGen
     {
-        public int textureIndex;
-        public int startingHeight;
+        public float zoom;
+        public float pow;
+        public SplatHeights[] splatHeights;
+        [System.Serializable]
+        public class SplatHeights
+        {
+            public int textureIndex;
+            public int startingHeight;
+            public Biome1[] resourses;
+            [System.Serializable]
+            public class Biome1
+            {
+                public int chance;
+                public GameObject obj;
+            }
+        }
     }
-    public SplatHeights2[] splatHeights2;
-    [System.Serializable]
-    public class SplatHeights2
-    {
-        public int textureIndex;
-        public int startingHeight;
-    }
-    public SplatHeights3[] splatHeights3;
-    [System.Serializable]
-    public class SplatHeights3
-    {
-        public int textureIndex;
-        public int startingHeight;
-    }
-    private Texture2D tex;
-    public float zoomR;
-    public float zoomG;
-    public float zoomB;
     public float zoomH;
     public float zoomH2;
-    public float powR;
-    public float powG;
-    public float powB;
     public float powH;
     public float powH2;
     public float Hsize;
     public float Hsize2;
-    private int ColorGen = 0;
+    public List<int> ColorGen;
     private int HeightGen = 0;
 
 
-    public Biome1[] biome1;
-    [System.Serializable]
-    public class Biome1
-    {
-        public int Hight;
-        public GameObject[] obj;
-    }
+    
 
     public NavMeshSurface[] surfaces;
     void Start()
@@ -63,7 +52,10 @@ public class TerrainGenerator : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             HeightGen = Random.Range(1, 1000);
-            ColorGen = Random.Range(1, 1000);
+            for (int i = 0; i < ColorGen.Count; i++)
+            {
+                ColorGen[i] = Random.Range(1, 1000);
+            }
 
             CreateTexure();
             SetTerrainHeights();
@@ -73,7 +65,7 @@ public class TerrainGenerator : MonoBehaviour
         }
         else
         {
-            if (ColorGen != 0 && HeightGen != 0)
+            if (HeightGen != 0)
             {
                 CreateTexure();
                 SetTerrainHeights();
@@ -112,60 +104,29 @@ public class TerrainGenerator : MonoBehaviour
             for (int x = 0; x < terrainData.alphamapWidth; x++)
             {
                 float terrainHeight = terrainData.GetHeight(y, x);
-                float[] splat = new float[splatHeights1.Length + splatHeights2.Length + splatHeights3.Length];
-                if (tex.GetPixel(x,y).r > 0.9)
+
+                int splats = 0;
+                for (int i = 0; i < BiomeGen.Length; i++)
                 {
-                    for (int i = 0; i < splatHeights1.Length; i++)
+                    splats += BiomeGen[i].splatHeights.Length;
+                }
+                float[] splat = new float[splats];
+
+                int index = Biomes[x, y];
+                for (int i = 0; i < BiomeGen[index].splatHeights.Length; i++)
+                {
+                    if (i == BiomeGen[index].splatHeights.Length - 1 && terrainHeight >= BiomeGen[index].splatHeights[i].startingHeight)
                     {
-                            if (i == splatHeights1.Length - 1 && terrainHeight >= splatHeights1[i].startingHeight)
-                            {
-                                splat[splatHeights1[i].textureIndex] = 1;
-                            }
-                            else if (terrainHeight >= splatHeights1[i].startingHeight && terrainHeight <= splatHeights1[i + 1].startingHeight)
-                            {
-                                splat[splatHeights1[i].textureIndex] = 1;
-                            }
+                        splat[BiomeGen[index].splatHeights[i].textureIndex] = 1;
                     }
-                    for (int j = 0; j < splatHeights1.Length; j++)
+                    else if (terrainHeight >= BiomeGen[index].splatHeights[i].startingHeight && terrainHeight <= BiomeGen[index].splatHeights[i + 1].startingHeight)
                     {
-                        splatmapData[x, y, splatHeights1[j].textureIndex] = splat[splatHeights1[j].textureIndex];
+                        splat[BiomeGen[index].splatHeights[i].textureIndex] = 1;
                     }
                 }
-                else if (tex.GetPixel(x, y).g > 0.9)
+                for (int j = 0; j < BiomeGen[index].splatHeights.Length; j++)
                 {
-                    for (int i = 0; i < splatHeights2.Length; i++)
-                    {
-                        if (i == splatHeights2.Length - 1 && terrainHeight >= splatHeights2[i].startingHeight)
-                        {
-                            splat[splatHeights2[i].textureIndex] = 1;
-                        }
-                        else if (terrainHeight >= splatHeights2[i].startingHeight && terrainHeight <= splatHeights2[i + 1].startingHeight)
-                        {
-                            splat[splatHeights2[i].textureIndex] = 1;
-                        }
-                    }
-                    for (int j = 0; j < splatHeights2.Length; j++)
-                    {
-                        splatmapData[x, y, splatHeights2[j].textureIndex] = splat[splatHeights2[j].textureIndex];
-                    }
-                }
-                else if (tex.GetPixel(x, y).b > 0.9)
-                {
-                    for (int i = 0; i < splatHeights3.Length; i++)
-                    {
-                        if (i == splatHeights3.Length - 1 && terrainHeight >= splatHeights3[i].startingHeight)
-                        {
-                            splat[splatHeights3[i].textureIndex] = 1;
-                        }
-                        else if (terrainHeight >= splatHeights3[i].startingHeight && terrainHeight <= splatHeights3[i + 1].startingHeight)
-                        {
-                            splat[splatHeights3[i].textureIndex] = 1;
-                        }
-                    }
-                    for (int j = 0; j < splatHeights3.Length; j++)
-                    {
-                        splatmapData[x, y, splatHeights3[j].textureIndex] = splat[splatHeights3[j].textureIndex];
-                    }
+                    splatmapData[x, y, BiomeGen[index].splatHeights[j].textureIndex] = splat[BiomeGen[index].splatHeights[j].textureIndex];
                 }
             }
         }
@@ -173,32 +134,23 @@ public class TerrainGenerator : MonoBehaviour
     }
     public void CreateTexure()
     {
-        tex = new Texture2D(size, size);
-
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                Color c = Color.white;
-                c.r = Mathf.Pow(Mathf.PerlinNoise((x + ColorGen * 100) / zoomR, y / zoomR), powR);
-                c.g = Mathf.Pow(Mathf.PerlinNoise(x / zoomG, (y + ColorGen * 100) / zoomG), powG);
-                c.b = Mathf.Pow(Mathf.PerlinNoise((x + ColorGen * 100) / zoomB, (y + ColorGen * 100) / zoomB), powB);
-                if (c.r > c.g && c.r > c.b)
+                int index = 0;
+                float indexInfo = 0;
+                for (int i = 0; i < BiomeGen.Length; i++)
                 {
-                    c = Color.red;
+                    if (Mathf.Pow(Mathf.PerlinNoise((x + ColorGen[i] * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow) > indexInfo)
+                    {
+                        indexInfo = Mathf.Pow(Mathf.PerlinNoise((x + ColorGen[i] * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow);
+                        index = i;
+                    }
                 }
-                else if (c.g > c.r && c.g > c.b)
-                {
-                    c = Color.green;
-                }
-                else if (c.b > c.r && c.b > c.g)
-                {
-                    c = Color.blue;
-                }
-                tex.SetPixel(x, y, c);
+                Biomes[x, y] = index;
             }
         }
-        tex.Apply();
     }
     public void CreateTrees()
     {
@@ -207,30 +159,51 @@ public class TerrainGenerator : MonoBehaviour
         {
             for (int x = 0; x < terrainData.alphamapWidth; x++)
             {
-                Color pixel = tex.GetPixel(y, x);
+                int index = Biomes[y, x];
                 float terrainHeight = terrainData.GetHeight(x, y);
-                if (pixel.r > 0.8f)
+
+                for (int i = 0; i < BiomeGen[index].splatHeights.Length ; i++)
                 {
-                    for (int i = 0; i < biome1.Length; i++)
+                    if (BiomeGen[index].splatHeights[i].resourses.Length > 0)
                     {
-                        if (biome1[i].obj.Length != 0)
+                        if (i > 0 && terrainHeight >= BiomeGen[index].splatHeights[i].startingHeight)
                         {
-                            if (i == biome1.Length - 1 && terrainHeight >= biome1[i].Hight)
+                            if (BiomeGen[index].splatHeights[i].resourses.Length > i)
                             {
-                                if (Random.Range(0, 25) == 0)
+                                if (terrainHeight <= BiomeGen[index].splatHeights[i+1].startingHeight)
                                 {
-                                    PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                    for (int r = 0; r < BiomeGen[index].splatHeights[i].resourses.Length; r++)
+                                    {
+                                        if (Random.Range(0, BiomeGen[index].splatHeights[i].resourses[r].chance) == 0)
+                                        {
+                                            PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                        }
+                                    }
                                 }
                             }
-                            else if (terrainHeight >= biome1[i].Hight && terrainHeight <= biome1[i + 1].Hight)
+                            else
                             {
-                                if (Random.Range(0, 25) == 0)
+
+                                for (int r = 0; r < BiomeGen[index].splatHeights[i].resourses.Length; r++)
                                 {
-                                    PhotonNetwork.Instantiate(biome1[i].obj[Random.Range(0, biome1[i].obj.Length)].name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                    if (Random.Range(0, BiomeGen[index].splatHeights[i].resourses[r].chance) == 0)
+                                    {
+                                        PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                    }
                                 }
                             }
                         }
-                    }
+                        //else if (terrainHeight >= BiomeGen[index].splatHeights[i].startingHeight && terrainHeight <= BiomeGen[index].splatHeights[i + 1].startingHeight)
+                        //{
+                        //    for (int r = 0; r < BiomeGen[index].splatHeights[i].resourses.Length; r++)
+                        //    {
+                        //        if (Random.Range(0, BiomeGen[index].splatHeights[i].resourses[r].chance) == 0)
+                        //        {
+                        //            PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                        //        }
+                        //    }
+                        //}
+                    } 
                 }
             }
         }
@@ -245,13 +218,13 @@ public class TerrainGenerator : MonoBehaviour
     [PunRPC]
     public void GetInfo()
     {
-        if (ColorGen != 0 && HeightGen != 0)
+        if (HeightGen != 0)
         {
             PV.RPC("SetInfo", RpcTarget.Others, HeightGen, ColorGen);
         }
     }
     [PunRPC]
-    public void SetInfo(int H, int C)
+    public void SetInfo(int H, List<int> C)
     {
         HeightGen = H;
         ColorGen = C;
