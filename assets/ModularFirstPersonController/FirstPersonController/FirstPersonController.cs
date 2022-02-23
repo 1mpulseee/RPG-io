@@ -46,7 +46,6 @@ public class FirstPersonController : MonoBehaviour
     // Internal Variables
     private bool isWalking = false;
 
-
     #region Head Bob
 
     public bool enableHeadBob = true;

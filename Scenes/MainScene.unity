@@ -168,7 +168,7 @@ MonoBehaviour:
     - textureIndex: 1
       startingHeight: 117
       resourses:
-      - chance: 50
+      - chance: 75
         obj: {fileID: 3108527273785947603, guid: a1b458a0ea2d39147826d9cd038e6cd3, type: 3}
   - zoom: 100
     pow: 2.5
@@ -179,16 +179,19 @@ MonoBehaviour:
     - textureIndex: 2
       startingHeight: 117
       resourses: []
+    - textureIndex: 3
+      startingHeight: 120
+      resourses: []
   - zoom: 100
     pow: 3
     splatHeights:
     - textureIndex: 0
       startingHeight: 0
       resourses: []
-    - textureIndex: 3
+    - textureIndex: 4
       startingHeight: 117
       resourses: []
-    - textureIndex: 4
+    - textureIndex: 5
       startingHeight: 122
       resourses: []
   zoomH: 75
