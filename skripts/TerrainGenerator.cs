@@ -46,6 +46,13 @@ public class TerrainGenerator : MonoBehaviour
     
 
     public NavMeshSurface[] surfaces;
+    public static TerrainGenerator Instance { get; private set; } // static singleton
+
+    private void Awake()
+    {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
+    }
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -56,27 +63,33 @@ public class TerrainGenerator : MonoBehaviour
             {
                 ColorGen[i] = Random.Range(1, 1000);
             }
-
+        }
+        Invoke("CreateWorld", 0.1f);
+    }
+    public void CreateWorld()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
             CreateTexure();
-            SetTerrainHeights();
-            PaintTerrain();
-            CreateTrees();
-            generateNavMesh();
+            //SetTerrainHeights();
+            //PaintTerrain();
+            //CreateTrees();
+            //generateNavMesh();
         }
         else
         {
             if (HeightGen != 0)
             {
                 CreateTexure();
-                SetTerrainHeights();
-                PaintTerrain();
-                generateNavMesh();
+                //SetTerrainHeights();
+                //PaintTerrain();
+                //generateNavMesh();
             }
             else
             {
                 PV.RPC("GetInfo", RpcTarget.MasterClient);
-                Invoke("Start", 0);
-            } 
+                Invoke("CreateWorld", 0);
+            }
         }
     }
     public void SetTerrainHeights()
@@ -92,6 +105,8 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
         TerrainMain.terrainData.SetHeights(0, 0, heights);
+        GameManager.Instance.UpdateLoadingScreen(50);
+        Invoke("PaintTerrain", 0.1f);
     }
     public void PaintTerrain()
     {
@@ -131,9 +146,16 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
         terrainData.SetAlphamaps(0, 0, splatmapData);
+        GameManager.Instance.UpdateLoadingScreen(75);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CreateResourses();
+        }
+        Invoke("generateNavMesh", 0.1f);
     }
     public void CreateTexure()
     {
+        GameManager.Instance.UpdateLoadingScreen(0);
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -151,8 +173,10 @@ public class TerrainGenerator : MonoBehaviour
                 Biomes[x, y] = index;
             }
         }
+        GameManager.Instance.UpdateLoadingScreen(25);
+        Invoke("SetTerrainHeights", 0.1f);
     }
-    public void CreateTrees()
+    public void CreateResourses()
     {
         TerrainData terrainData = TerrainMain.terrainData;
         for (int y = 0; y < terrainData.alphamapHeight; y++)
@@ -214,6 +238,8 @@ public class TerrainGenerator : MonoBehaviour
         {
             surfaces[i].BuildNavMesh();
         }
+        GameManager.Instance.UpdateLoadingScreen(100);
+        GameManager.Instance.SpawnPlayer();
     }
     [PunRPC]
     public void GetInfo()
