@@ -58,13 +58,28 @@ public class TerrainGenerator : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PhotonNetwork.IsMasterClient)
         {
-            HeightGen = Random.Range(1, 1000);
-            for (int i = 0; i < ColorGen.Count; i++)
+            if (HeightGen < 0)
             {
-                ColorGen[i] = Random.Range(1, 1000);
+                HeightGen = Random.Range(1, 1000);
+                for (int i = 0; i < ColorGen.Count; i++)
+                {
+                    ColorGen[i] = Random.Range(1, 1000);
+                }
+                Invoke("CreateWorld", 0.1f);
             }
         }
-        Invoke("CreateWorld", 0.1f);
+        else
+        {
+            if (HeightGen < 0)
+            {
+                PV.RPC("GetInfo", RpcTarget.MasterClient);
+                Invoke("Start", 0);
+            }
+            else
+            {
+                Invoke("CreateWorld", 0.1f);
+            }
+        }  
     }
     public void CreateWorld()
     {
