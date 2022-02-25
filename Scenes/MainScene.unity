@@ -200,7 +200,8 @@ MonoBehaviour:
   powH2: 2
   Hsize: 0.2
   Hsize2: 0.1
-  ColorGen: 000000000000000000000000
+  ColorGen: 0
+  ColorGenMix: 64000000c80000002c01000090010000f401000058020000bc0200002003000084030000e8030000
   surfaces:
   - {fileID: 100298529}
 --- !u!154 &100298526
@@ -871,7 +872,8 @@ MonoBehaviour:
   powH2: 4
   Hsize: 0.2
   Hsize2: 0.25
-  ColorGen: 
+  ColorGen: 0
+  ColorGenMix: 
   surfaces: []
 --- !u!64 &1189219938
 MeshCollider:

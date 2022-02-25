@@ -39,7 +39,8 @@ public class TerrainGenerator : MonoBehaviour
     public float powH2;
     public float Hsize;
     public float Hsize2;
-    public List<int> ColorGen;
+    public int ColorGen;
+    public List<int> ColorGenMix;
     private int HeightGen = 0;
 
 
@@ -61,10 +62,7 @@ public class TerrainGenerator : MonoBehaviour
             if (HeightGen < 1)
             {
                 HeightGen = Random.Range(1, 1000);
-                for (int i = 0; i < ColorGen.Count; i++)
-                {
-                    ColorGen[i] = Random.Range(1, 1000);
-                }
+                ColorGen = Random.Range(1, 1000);
                 Invoke("CreateWorld", 0.1f);
             }
         }
@@ -179,9 +177,9 @@ public class TerrainGenerator : MonoBehaviour
                 float indexInfo = 0;
                 for (int i = 0; i < BiomeGen.Length; i++)
                 {
-                    if (Mathf.Pow(Mathf.PerlinNoise((x + ColorGen[i] * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow) > indexInfo)
+                    if (Mathf.Pow(Mathf.PerlinNoise((x + (ColorGenMix[i] + ColorGen) * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow) > indexInfo)
                     {
-                        indexInfo = Mathf.Pow(Mathf.PerlinNoise((x + ColorGen[i] * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow);
+                        indexInfo = Mathf.Pow(Mathf.PerlinNoise((x + (ColorGenMix[i] + ColorGen) * 100) / BiomeGen[i].zoom, y / BiomeGen[i].zoom), BiomeGen[i].pow);
                         index = i;
                     }
                 }
@@ -265,7 +263,7 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
     [PunRPC]
-    public void SetInfo(int H, List<int> C)
+    public void SetInfo(int H, int C)
     {
         HeightGen = H;
         ColorGen = C;
