@@ -58,7 +58,7 @@ public class TerrainGenerator : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PhotonNetwork.IsMasterClient)
         {
-            if (HeightGen < 0)
+            if (HeightGen < 1)
             {
                 HeightGen = Random.Range(1, 1000);
                 for (int i = 0; i < ColorGen.Count; i++)
@@ -70,7 +70,7 @@ public class TerrainGenerator : MonoBehaviour
         }
         else
         {
-            if (HeightGen < 0)
+            if (HeightGen < 1)
             {
                 PV.RPC("GetInfo", RpcTarget.MasterClient);
                 Invoke("Start", 0);
