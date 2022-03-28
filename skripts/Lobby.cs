@@ -7,10 +7,16 @@ using UnityEngine.UI;
 public class Lobby : MonoBehaviourPunCallbacks
 {
     [System.Serializable] public enum DropDown { MainScene, test }
+    [SerializeField] List<GameObject> Buttons = new List<GameObject>();
 
     [SerializeField] public DropDown scene;
+    private void Awake()
+    {
+        for (int i = 0; i < Buttons.Count; i++) { Buttons[i].SetActive(false); }
+    }
     void Start()
     {
+        
         //Debug.Log(PhotonNetwork.MAX_VIEW_IDS);
         PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999); //�������
         //Log("Player name: " + PhotonNetwork.NickName);
@@ -32,6 +38,10 @@ public class Lobby : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Server loaded");
+        for (int i = 0; i < Buttons.Count; i++) {Buttons[i].SetActive(true);}
+        
+
+        
         PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedRoom()
