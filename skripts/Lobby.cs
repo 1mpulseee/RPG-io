@@ -13,6 +13,8 @@ public class Lobby : MonoBehaviourPunCallbacks
     private void Awake()
     {
         for (int i = 0; i < Buttons.Count; i++) { Buttons[i].SetActive(false); }
+
+
     }
     void Start()
     {
@@ -39,9 +41,9 @@ public class Lobby : MonoBehaviourPunCallbacks
     {
         Debug.Log("Server loaded");
         for (int i = 0; i < Buttons.Count; i++) {Buttons[i].SetActive(true);}
-        
 
-        
+
+
         PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedRoom()
