@@ -17,7 +17,8 @@ public class FirstPersonController : MonoBehaviour
     public float coolDown = 2f;
     public Transform modules;
     public List<GameObject> objs;
-    public Transform selector;
+    private Transform selector;
+    public GameObject selectorP;
     public float camH;
     public bool IsAttack = false;
 
@@ -75,6 +76,7 @@ public class FirstPersonController : MonoBehaviour
         }
         needRot = transform.rotation;
         modules.parent = null;
+        selector = Instantiate(selectorP, transform).transform;
         selector.parent = null;
     }
 
