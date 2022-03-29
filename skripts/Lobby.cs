@@ -11,13 +11,27 @@ public class Lobby : MonoBehaviourPunCallbacks
     [SerializeField] public DropDown scene;
     [SerializeField] List<GameObject> Buttons = new List<GameObject>();
     private List<RoomInfo> roomList = new List<RoomInfo>();
+    public InputField NameInput;
+    public Text nameText;
+    public GameObject TextChangeMenu;
     private void Awake()
     {
         for (int i = 0; i < Buttons.Count; i++) { Buttons[i].SetActive(false); }
     }
     void Start()
     {
-        PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999); //�������
+        TextChangeMenu.SetActive(false);
+        if (PlayerPrefs.HasKey("Name"))
+        {
+            PhotonNetwork.NickName = PlayerPrefs.GetString("Name");
+            nameText.text = PhotonNetwork.NickName;
+        }
+        else
+        {
+            PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999); //�������
+            PlayerPrefs.SetString("Name", PhotonNetwork.NickName);
+            nameText.text = PhotonNetwork.NickName;
+        }
         PhotonNetwork.AutomaticallySyncScene = true; //���������������� �����
         PhotonNetwork.GameVersion = "1"; //������ ����
         PhotonNetwork.ConnectUsingSettings();
@@ -33,6 +47,21 @@ public class Lobby : MonoBehaviourPunCallbacks
             string RoomName = "room" + Random.Range(0, 10000);
             PhotonNetwork.CreateRoom(RoomName, new Photon.Realtime.RoomOptions { IsVisible = true, MaxPlayers = 12 }, Photon.Realtime.TypedLobby.Default);
         }
+    }
+    public void OpenChangeName()
+    {
+        TextChangeMenu.SetActive(true);
+    }
+    public void ChangeName()
+    {
+        if (NameInput.text != string.Empty)
+        {
+            PhotonNetwork.NickName = NameInput.text;
+        }
+        PlayerPrefs.SetString("Name", PhotonNetwork.NickName);
+        nameText.text = PhotonNetwork.NickName;
+        NameInput.text = "";
+        TextChangeMenu.SetActive(false);
     }
     public bool CheckRooms()
     {
