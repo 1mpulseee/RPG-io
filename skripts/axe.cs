@@ -12,10 +12,9 @@ public class axe : MonoBehaviour
         public int lvl;
     }
     private bool IsAttack = false;
-    public FirstPersonController main;
     private void OnTriggerEnter(Collider other)
     {
-        IsAttack = main.IsAttack;
+        IsAttack = FirstPersonController.Instance.IsAttack;
         if (IsAttack)
         {
             if (other.CompareTag("tree"))
@@ -28,7 +27,7 @@ public class axe : MonoBehaviour
                         switch (other.GetComponentInParent<resource>().treeInfo.type.ToString())
                         {
                             case "tree":
-                                main.woodCount += axeParamerts.damage;
+                                FirstPersonController.Instance.woodCount += axeParamerts.damage;
                                 break;
                         }
                     }

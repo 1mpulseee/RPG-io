@@ -46,7 +46,8 @@ public class FirstPersonController : MonoBehaviour
 
     // Internal Variables
     private bool isWalking = false;
-
+    //Singleton
+    public static FirstPersonController Instance;
     #region Head Bob
 
     public bool enableHeadBob = true;
@@ -62,15 +63,24 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
-        AnimSyns = GetComponent<AnimSyns>();
-        rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-        jointOriginalPos = joint.localPosition;
+        
     }
 
     void Start()
     {
-        if(lockCursor)
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        AnimSyns = GetComponent<AnimSyns>();
+        rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        jointOriginalPos = joint.localPosition;
+        if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
