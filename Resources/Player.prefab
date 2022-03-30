@@ -1664,77 +1664,77 @@ MonoBehaviour:
     Exp: 100
     speed: 6
     damage: 20
-    Regenerate: 10
+    Regenerate: 1.5
   - Health: 120
     Exp: 135
     speed: 5.7
     damage: 22
-    Regenerate: 0
+    Regenerate: 1.72
   - Health: 144
     Exp: 182
     speed: 5.41
     damage: 24
-    Regenerate: 0
+    Regenerate: 1.98
   - Health: 173
     Exp: 246
     speed: 5.14
     damage: 26
-    Regenerate: 0
+    Regenerate: 2.28
   - Health: 208
     Exp: 332
     speed: 4.88
     damage: 29
-    Regenerate: 0
+    Regenerate: 2.62
   - Health: 250
     Exp: 448
     speed: 4.64
     damage: 32
-    Regenerate: 0
+    Regenerate: 3.01
   - Health: 300
     Exp: 605
     speed: 4.41
     damage: 35
-    Regenerate: 0
+    Regenerate: 3.46
   - Health: 360
     Exp: 817
     speed: 4.19
     damage: 38
-    Regenerate: 0
+    Regenerate: 3.98
   - Health: 432
     Exp: 1103
     speed: 3.98
     damage: 42
-    Regenerate: 0
+    Regenerate: 4.58
   - Health: 518
     Exp: 1489
     speed: 3.78
     damage: 46
-    Regenerate: 0
+    Regenerate: 5.27
   - Health: 622
     Exp: 2010
     speed: 3.59
     damage: 51
-    Regenerate: 0
+    Regenerate: 6.06
   - Health: 746
     Exp: 2714
     speed: 3.41
     damage: 56
-    Regenerate: 0
+    Regenerate: 6.97
   - Health: 895
     Exp: 3664
     speed: 3.24
     damage: 62
-    Regenerate: 0
+    Regenerate: 8.02
   - Health: 1074
     Exp: 4946
     speed: 3.08
     damage: 68
-    Regenerate: 0
+    Regenerate: 9.22
   - Health: 1289
     Exp: 6677
     speed: 2.93
     damage: 75
-    Regenerate: 0
+    Regenerate: 10.6
 --- !u!1 &4550443871299423599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3895,6 +3895,10 @@ PrefabInstance:
     - target: {fileID: 4792079877757720185, guid: cdecf59fc7ad88b4b8381cf9682d6bfe, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792079877757720187, guid: cdecf59fc7ad88b4b8381cf9682d6bfe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4792079877757749849, guid: cdecf59fc7ad88b4b8381cf9682d6bfe, type: 3}
       propertyPath: m_RootOrder

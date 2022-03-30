@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     }
     private float currentHealth = 10f;
 
-    public int WoodCount;
+    public float WoodCount;
 
     public float exp = 0f;
     public float expToLevel = 100f;
@@ -46,19 +46,18 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         UpdateParametrs(0);
-        InvokeRepeating("Regeneration", 1, 0);
+        InvokeRepeating("Regeneration", 1, .25f);
     }
     public void Regeneration()
     {
         if (CurrentHealth < maxHealth && WoodCount > 0)
         {
-            int regen = (int)Regen;
-            int RgCount = (int)(maxHealth - CurrentHealth);
+            float RgCount = maxHealth - CurrentHealth;
             if (WoodCount < RgCount)
             {
                 RgCount = WoodCount;
             }
-            if (lvlParametrs[level].Regenerate < RgCount)
+            if (Regen < RgCount)
             {
                 RgCount = (int)lvlParametrs[level].Regenerate;
             }
@@ -78,7 +77,7 @@ public class PlayerStats : MonoBehaviour
     public void UpdateParametrs(int lvl)
     {
         maxHealth = lvlParametrs[lvl].Health;
-        //CurrentHealth = maxHealth;
+        CurrentHealth = maxHealth;
         expToLevel = lvlParametrs[lvl].Exp;
         speed = lvlParametrs[lvl].speed;
         damage = lvlParametrs[lvl].damage;
@@ -105,12 +104,12 @@ public class PlayerStats : MonoBehaviour
             float Regen = lvlParametrs[0].Regenerate;
             for (int i = 1; i < lvlParametrs.Length; i++)
             {
-                Regen *= 1.1f;
+                Regen *= 1.18f;
                 HP *= 1.2f;
                 exp *= 1.35f;
                 speed *= 0.95f;
-                damage *= 1.1f;
-                Regen = (float)Math.Round((double)Regen, 0);
+                damage *= 1.18f;
+                Regen = (float)Math.Round((double)Regen, 2);
                 HP = (float)Math.Round((double)HP, 0);
                 exp = (float)Math.Round((double)exp, 0);
                 speed = (float)Math.Round((double)speed, 2);
