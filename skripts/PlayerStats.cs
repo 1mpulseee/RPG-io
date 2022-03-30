@@ -24,7 +24,18 @@ public class PlayerStats : MonoBehaviour
 
     public float WoodCount;
 
-    public float exp = 0f;
+    public float Exp
+    {
+        set
+        {
+            exp = value;
+            UpdateSliders();
+        }
+        get { return exp; }
+    }
+    
+    
+    private float exp;
     public float expToLevel = 100f;
     
     public int level = 0;
@@ -67,10 +78,10 @@ public class PlayerStats : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (exp > expToLevel)
+        if (Exp > expToLevel)
         {
             level++;
-            exp = 0;
+            Exp = 0;
             UpdateParametrs(level);
         }
     }
@@ -89,7 +100,7 @@ public class PlayerStats : MonoBehaviour
         healthBar.maxValue = maxHealth;
         healthBar.value = CurrentHealth;
         ExpSlider.maxValue = expToLevel;
-        ExpSlider.value = exp;
+        ExpSlider.value = Exp;
     }
 #if UNITY_EDITOR
     [ContextMenu("SetLvl")]

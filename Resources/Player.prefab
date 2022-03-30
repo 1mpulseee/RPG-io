@@ -1653,7 +1653,6 @@ MonoBehaviour:
   healthBar: {fileID: 1701929187763098657}
   ExpSlider: {fileID: 4498826067264938153}
   WoodCount: 0
-  exp: 0
   expToLevel: 100
   level: 0
   speed: 0

@@ -16,7 +16,7 @@ public class resource : MonoBehaviour
     [System.Serializable]
     public class TreeInfo
     {
-        [System.Serializable] public enum DropDown { tree, stone}
+        [System.Serializable] public enum DropDown { tree, stone }
 
         [SerializeField] public DropDown type;
         public int ToolLvl;
@@ -68,7 +68,7 @@ public class resource : MonoBehaviour
         //treeInfo.stage--;
         //if (treeInfo.stage < 0)
         //{
-            treeInfo.stage = 0;
+        treeInfo.stage = 0;
         //}
         PV.RPC("changeResource", RpcTarget.All, treeInfo.stage);
         CancelInvoke();
