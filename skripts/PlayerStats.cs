@@ -46,13 +46,12 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         UpdateParametrs(0);
-        InvokeRepeating("Regeneration", 1, 0.1f);
+        InvokeRepeating("Regeneration", 1, 0);
     }
     public void Regeneration()
     {
-        if (CurrentHealth < maxHealth && WoodCount > 0) 
+        if (CurrentHealth < maxHealth && WoodCount > 0)
         {
-            Debug.Log("Started");
             int regen = (int)Regen;
             int RgCount = (int)(maxHealth - CurrentHealth);
             if (WoodCount < RgCount)
@@ -65,19 +64,16 @@ public class PlayerStats : MonoBehaviour
             }
             CurrentHealth += RgCount;
             WoodCount -= RgCount;
-            return;
         }
-        Debug.Log("Else");
     }
     private void FixedUpdate()
     {
-        if (exp > expToLevel) // Level up
+        if (exp > expToLevel)
         {
             level++;
             exp = 0;
             UpdateParametrs(level);
         }
-        //Debug.Log(CurrentHealth);
     }
     public void UpdateParametrs(int lvl)
     {
@@ -96,16 +92,6 @@ public class PlayerStats : MonoBehaviour
         ExpSlider.maxValue = expToLevel;
         ExpSlider.value = exp;
     }
-
-
-
-
-
-
-
-
-
-    //
 #if UNITY_EDITOR
     [ContextMenu("SetLvl")]
     public void SetLvl()
