@@ -30,7 +30,7 @@ public class axe : MonoBehaviour
                                 FirstPersonController.Instance.playerStats.WoodCount += axeParamerts.damage;
                                 break;
                             case "stone":
-                                FirstPersonController.Instance.playerStats.exp += axeParamerts.damage;
+                                FirstPersonController.Instance.playerStats.Exp += axeParamerts.damage;
                                 break;
                         }
                     }
