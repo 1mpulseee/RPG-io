@@ -6,12 +6,24 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    public Animator HpAnim;
     public Slider healthBar;
     public Slider ExpSlider;
-    
-    private float maxHealth = 100f;
-    private float currentHealth = 100f;
-    
+
+    private float maxHealth = 0f;
+    public float CurrentHealth
+    {
+        set
+        {
+            currentHealth = value;
+            UpdateSliders();
+        }
+        get { return currentHealth; }
+    }
+    private float currentHealth = 10f;
+
+    public int WoodCount;
+
     public float exp = 0f;
     public float expToLevel = 100f;
     
@@ -19,7 +31,8 @@ public class PlayerStats : MonoBehaviour
     
     public float speed;
     public float damage;
-    
+    public float Regen;
+
     [System.Serializable]
     public class LvlParametrs
     {
@@ -27,11 +40,31 @@ public class PlayerStats : MonoBehaviour
         public float Exp;
         public float speed;
         public float damage;
+        public float Regenerate;
     }
     public LvlParametrs[] lvlParametrs;
     void Start()
     {
         UpdateParametrs(0);
+        InvokeRepeating("Regeneration", 1, 0);
+    }
+    public void Regeneration()
+    {
+        if (CurrentHealth < maxHealth && WoodCount > 0)
+        {
+            int regen = (int)Regen;
+            int RgCount = (int)(maxHealth - CurrentHealth);
+            if (WoodCount < RgCount)
+            {
+                RgCount = WoodCount;
+            }
+            if (lvlParametrs[level].Regenerate < RgCount)
+            {
+                RgCount = (int)lvlParametrs[level].Regenerate;
+            }
+            CurrentHealth += RgCount;
+            WoodCount -= RgCount;
+        }
     }
     private void FixedUpdate()
     {
@@ -45,16 +78,17 @@ public class PlayerStats : MonoBehaviour
     public void UpdateParametrs(int lvl)
     {
         maxHealth = lvlParametrs[lvl].Health;
-        currentHealth = maxHealth;
+        //CurrentHealth = maxHealth;
         expToLevel = lvlParametrs[lvl].Exp;
         speed = lvlParametrs[lvl].speed;
         damage = lvlParametrs[lvl].damage;
+        Regen = lvlParametrs[lvl].Regenerate;
         UpdateSliders();
     }
     public void UpdateSliders()
     {
         healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
+        healthBar.value = CurrentHealth;
         ExpSlider.maxValue = expToLevel;
         ExpSlider.value = exp;
     }
@@ -68,16 +102,20 @@ public class PlayerStats : MonoBehaviour
             float exp = lvlParametrs[0].Exp;
             float speed = lvlParametrs[0].speed;
             float damage = lvlParametrs[0].damage;
+            float Regen = lvlParametrs[0].Regenerate;
             for (int i = 1; i < lvlParametrs.Length; i++)
             {
+                Regen *= 1.1f;
                 HP *= 1.2f;
                 exp *= 1.35f;
                 speed *= 0.95f;
                 damage *= 1.1f;
+                Regen = (float)Math.Round((double)Regen, 0);
                 HP = (float)Math.Round((double)HP, 0);
                 exp = (float)Math.Round((double)exp, 0);
                 speed = (float)Math.Round((double)speed, 2);
                 damage = (float)Math.Round((double)damage, 0);
+                lvlParametrs[i].Regenerate = Regen;
                 lvlParametrs[i].Health = HP;
                 lvlParametrs[i].Exp = exp;
                 lvlParametrs[i].speed = speed;

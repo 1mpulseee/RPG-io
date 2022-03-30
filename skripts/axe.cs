@@ -27,7 +27,10 @@ public class axe : MonoBehaviour
                         switch (other.GetComponentInParent<resource>().treeInfo.type.ToString())
                         {
                             case "tree":
-                                FirstPersonController.Instance.woodCount += axeParamerts.damage;
+                                FirstPersonController.Instance.playerStats.WoodCount += axeParamerts.damage;
+                                break;
+                            case "stone":
+                                FirstPersonController.Instance.playerStats.exp += axeParamerts.damage;
                                 break;
                         }
                     }

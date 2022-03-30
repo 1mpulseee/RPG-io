@@ -8,6 +8,7 @@ public class FirstPersonController : MonoBehaviour
     AnimSyns AnimSyns;
     public int woodCount;
     public int stoneCount;
+    public PlayerStats playerStats;
 
 
     private Quaternion needRot;
