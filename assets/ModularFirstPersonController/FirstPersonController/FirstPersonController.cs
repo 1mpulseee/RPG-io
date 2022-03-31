@@ -157,13 +157,12 @@ public class FirstPersonController : MonoBehaviour
             }
             selector.transform.position = s.transform.position;
             var dir = transform.position - s.transform.position;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, (s.transform.position - transform.position), 10, 0.0F);
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, (s.transform.position - transform.position + new Vector3(0, .5f, 0)), 10, 0.0F);
             needRot = Quaternion.LookRotation(newDir);
             if (time > coolDown)
             {
                 time = 0;
                 AnimSyns.SetAnimTrigger("axe");
-                //anim.SetTrigger("axe");
             }
         }
         else
