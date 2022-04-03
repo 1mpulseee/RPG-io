@@ -17,6 +17,10 @@ public class networkManager : MonoBehaviourPunCallbacks
             fps.enabled = false;
             module.SetActive(false);
         }
+        else
+        {
+            fps.InstanceSet();
+        }
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {

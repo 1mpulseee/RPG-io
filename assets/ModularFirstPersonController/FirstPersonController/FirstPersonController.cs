@@ -66,17 +66,21 @@ public class FirstPersonController : MonoBehaviour
     {
         
     }
+    public void InstanceSet()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
         AnimSyns = GetComponent<AnimSyns>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
