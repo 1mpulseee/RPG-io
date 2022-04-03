@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject PlayerPrefab;
     public GameObject cam;
+    public Image LoadImg;
     public Text text;
     public float MinSpawnHight;
     public static GameManager Instance { get; private set; } // static singleton
