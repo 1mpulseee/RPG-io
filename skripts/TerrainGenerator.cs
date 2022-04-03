@@ -6,6 +6,8 @@ using Photon.Pun;
 
 public class TerrainGenerator : MonoBehaviour
 {
+    public GameObject test;
+
     private PhotonView PV;
     public Terrain TerrainMain;
     public int size = 513;
@@ -225,7 +227,14 @@ public class TerrainGenerator : MonoBehaviour
                                 {
                                     if (Random.Range(0, BiomeGen[index].splatHeights[i].resourses[r].chance) == 0)
                                     {
-                                        PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                        if (test == null)
+                                        {
+                                            test = PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                        }
+                                        else
+                                        {
+                                            PhotonNetwork.Instantiate(BiomeGen[index].splatHeights[i].resourses[r].obj.name, new Vector3(x * 1000 / 512, terrainHeight, y * 1000 / 512), Quaternion.identity);
+                                        }
                                     }
                                 }
                             }
