@@ -20,6 +20,7 @@ public class networkManager : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        Debug.LogWarning("leave" + otherPlayer.NickName);
         Debug.LogWarning(otherPlayer.IsMasterClient);
     } 
 }
