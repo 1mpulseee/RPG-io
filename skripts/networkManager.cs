@@ -20,6 +20,12 @@ public class networkManager : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        if (PV.IsMine)
+        {
+            Debug.LogWarning(PhotonNetwork.MasterClient + "mine");
+            Debug.LogWarning("leave" + otherPlayer.NickName + "mine");
+            Debug.LogWarning(otherPlayer.IsMasterClient + "mine");
+        }
         Debug.LogWarning(PhotonNetwork.MasterClient);
         Debug.LogWarning("leave" + otherPlayer.NickName);
         Debug.LogWarning(otherPlayer.IsMasterClient);
