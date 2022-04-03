@@ -1673,80 +1673,80 @@ MonoBehaviour:
   Regen: 0
   lvlParametrs:
   - Health: 100
-    Exp: 100
+    Exp: 50
     speed: 6
     damage: 20
     Regenerate: 1.5
   - Health: 120
-    Exp: 135
+    Exp: 68
     speed: 5.7
-    damage: 22
-    Regenerate: 1.72
-  - Health: 144
-    Exp: 182
-    speed: 5.41
     damage: 24
-    Regenerate: 1.98
+    Regenerate: 1.77
+  - Health: 144
+    Exp: 92
+    speed: 5.41
+    damage: 28
+    Regenerate: 2.09
   - Health: 173
-    Exp: 246
+    Exp: 124
     speed: 5.14
-    damage: 26
-    Regenerate: 2.28
+    damage: 33
+    Regenerate: 2.47
   - Health: 208
-    Exp: 332
+    Exp: 167
     speed: 4.88
-    damage: 29
-    Regenerate: 2.62
+    damage: 39
+    Regenerate: 2.91
   - Health: 250
-    Exp: 448
+    Exp: 225
     speed: 4.64
-    damage: 32
-    Regenerate: 3.01
-  - Health: 300
-    Exp: 605
-    speed: 4.41
-    damage: 35
-    Regenerate: 3.46
-  - Health: 360
-    Exp: 817
-    speed: 4.19
-    damage: 38
-    Regenerate: 3.98
-  - Health: 432
-    Exp: 1103
-    speed: 3.98
-    damage: 42
-    Regenerate: 4.58
-  - Health: 518
-    Exp: 1489
-    speed: 3.78
     damage: 46
-    Regenerate: 5.27
+    Regenerate: 3.43
+  - Health: 300
+    Exp: 304
+    speed: 4.41
+    damage: 54
+    Regenerate: 4.05
+  - Health: 360
+    Exp: 410
+    speed: 4.19
+    damage: 64
+    Regenerate: 4.78
+  - Health: 432
+    Exp: 554
+    speed: 3.98
+    damage: 76
+    Regenerate: 5.64
+  - Health: 518
+    Exp: 748
+    speed: 3.78
+    damage: 90
+    Regenerate: 6.66
   - Health: 622
-    Exp: 2010
+    Exp: 1010
     speed: 3.59
-    damage: 51
-    Regenerate: 6.06
+    damage: 106
+    Regenerate: 7.86
   - Health: 746
-    Exp: 2714
+    Exp: 1364
     speed: 3.41
-    damage: 56
-    Regenerate: 6.97
+    damage: 125
+    Regenerate: 9.27
   - Health: 895
-    Exp: 3664
+    Exp: 1841
     speed: 3.24
-    damage: 62
-    Regenerate: 8.02
+    damage: 148
+    Regenerate: 10.94
   - Health: 1074
-    Exp: 4946
+    Exp: 2485
     speed: 3.08
-    damage: 68
-    Regenerate: 9.22
+    damage: 175
+    Regenerate: 12.91
   - Health: 1289
-    Exp: 6677
+    Exp: 3355
     speed: 2.93
-    damage: 75
-    Regenerate: 10.6
+    damage: 206
+    Regenerate: 15.23
 --- !u!1 &4550443871299423599
 GameObject:
   m_ObjectHideFlags: 0
