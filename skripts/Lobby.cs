@@ -45,7 +45,7 @@ public class Lobby : MonoBehaviourPunCallbacks
         else
         {
             string RoomName = "room" + Random.Range(0, 10000);
-            PhotonNetwork.CreateRoom(RoomName, new Photon.Realtime.RoomOptions { IsVisible = true, MaxPlayers = 12 }, Photon.Realtime.TypedLobby.Default);
+            PhotonNetwork.CreateRoom(RoomName, new Photon.Realtime.RoomOptions { IsVisible = true, MaxPlayers = 12 , CleanupCacheOnLeave = false}, Photon.Realtime.TypedLobby.Default);
         }
     }
     public void OpenChangeName()
