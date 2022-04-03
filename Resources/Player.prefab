@@ -1497,6 +1497,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90ba6530d9bfda47abb4610956b2f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AxeLvl: 1
+  PickaxeLvl: 1
+  axes:
+  - {fileID: 8527591240000182199}
+  - {fileID: 8805328410258376372}
+  - {fileID: 4692545870612335992}
+  - {fileID: 4792079876162632605}
+  pickaxes:
+  - {fileID: 2647864896920750468}
+  - {fileID: 1019368075262796624}
+  - {fileID: 1664110992950302739}
+  - {fileID: 1384056719775955617}
   woodCount: 0
   stoneCount: 0
   playerStats: {fileID: 1244291251277938170}
@@ -1533,6 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e11dfddf04794e45b9bdea8492f7d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 0}
   fps: {fileID: 6671328693226461543}
   module: {fileID: 6671328693978272943}
 --- !u!114 &8884345325482317249
@@ -4072,7 +4085,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664110992950302739}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.3919756, y: 0.79120004, z: 0.5455019}
@@ -4183,7 +4196,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384056719775955617}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.10166975, y: 0.020000046, z: 0.015014894}
@@ -4294,7 +4307,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647864896920750468}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.272247, y: 0.9900559, z: 0.9999998}
@@ -4405,7 +4418,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019368075262796624}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.10166978, y: 0.020000054, z: 0.017255442}

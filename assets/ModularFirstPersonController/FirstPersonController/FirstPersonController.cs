@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public int AxeLvl = 1;
+    public int PickaxeLvl = 1;
+    public GameObject[] axes;
+    public GameObject[] pickaxes;
+
     AnimSyns AnimSyns;
     public int woodCount;
     public int stoneCount;
@@ -64,7 +69,16 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
-        
+        for (int i = 0; i < axes.Length; i++)
+        {
+            axes[i].SetActive(false);
+        }
+        axes[AxeLvl - 1].SetActive(true);
+        for (int i = 0; i < pickaxes.Length; i++)
+        {
+            pickaxes[i].SetActive(false);
+        }
+        pickaxes[PickaxeLvl - 1].SetActive(true);
     }
     public void InstanceSet()
     {
@@ -166,6 +180,30 @@ public class FirstPersonController : MonoBehaviour
             if (time > coolDown)
             {
                 time = 0;
+                if (s.GetComponent<resource>().treeInfo.type == resource.TreeInfo.DropDown.tree)
+                {
+                    for (int i = 0; i < axes.Length; i++)
+                    {
+                        axes[i].SetActive(false);
+                    }
+                    axes[AxeLvl - 1].SetActive(true);
+                    for (int i = 0; i < pickaxes.Length; i++)
+                    {
+                        pickaxes[i].SetActive(false);
+                    }
+                }
+                if (s.GetComponent<resource>().treeInfo.type == resource.TreeInfo.DropDown.stone)
+                {
+                    for (int i = 0; i < axes.Length; i++)
+                    {
+                        axes[i].SetActive(false);
+                    }
+                    for (int i = 0; i < pickaxes.Length; i++)
+                    {
+                        pickaxes[i].SetActive(false);
+                    }
+                    pickaxes[PickaxeLvl - 1].SetActive(true);
+                }                
                 AnimSyns.SetAnimTrigger("axe");
             }
         }
