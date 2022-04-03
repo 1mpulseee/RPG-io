@@ -78,7 +78,6 @@ public class FirstPersonController : MonoBehaviour
         {
             pickaxes[i].SetActive(false);
         }
-        pickaxes[PickaxeLvl - 1].SetActive(true);
     }
     public void InstanceSet()
     {
