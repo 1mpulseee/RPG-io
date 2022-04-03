@@ -168,8 +168,10 @@ MonoBehaviour:
     - textureIndex: 1
       startingHeight: 117
       resourses:
-      - chance: 75
+      - chance: 150
         obj: {fileID: 3108527273785947603, guid: a1b458a0ea2d39147826d9cd038e6cd3, type: 3}
+      - chance: 150
+        obj: {fileID: 6896000268078463173, guid: 6dd608eb260a6bf45854307ac21ff01a, type: 3}
   - zoom: 100
     pow: 2.5
     splatHeights:

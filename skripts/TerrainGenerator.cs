@@ -205,9 +205,9 @@ public class TerrainGenerator : MonoBehaviour
                     {
                         if (i > 0 && terrainHeight >= BiomeGen[index].splatHeights[i].startingHeight)
                         {
-                            if (BiomeGen[index].splatHeights[i].resourses.Length > i)
+                            if (BiomeGen[index].splatHeights.Length > i + 1)
                             {
-                                if (terrainHeight <= BiomeGen[index].splatHeights[i+1].startingHeight)
+                                if (terrainHeight <= BiomeGen[index].splatHeights[i + 1].startingHeight)
                                 {
                                     for (int r = 0; r < BiomeGen[index].splatHeights[i].resourses.Length; r++)
                                     {

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class networkManager : MonoBehaviour
+public class networkManager : MonoBehaviourPunCallbacks
 {
     private PhotonView PV;
     public FirstPersonController fps;
@@ -17,4 +18,8 @@ public class networkManager : MonoBehaviour
             module.SetActive(false);
         }
     }
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        Debug.LogWarning(otherPlayer.IsMasterClient);
+    } 
 }
