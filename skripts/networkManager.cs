@@ -6,10 +6,10 @@ using Photon.Realtime;
 
 public class networkManager : MonoBehaviour//PunCallbacks
 {
-    public TerrainGenerator terrainGenerator;
     private PhotonView PV;
     public FirstPersonController fps;
     public GameObject module;
+    public GameObject Stats;
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -20,24 +20,16 @@ public class networkManager : MonoBehaviour//PunCallbacks
         }
         else
         {
+            Stats.SetActive(false);
             fps.InstanceSet();
         }
     }
-    //public override void OnPlayerLeftRoom(Player otherPlayer)
-    //{
-    //    var pv = terrainGenerator.test.GetComponent<PhotonView>();
-    //    if (pv.Owner == PhotonNetwork.MasterClient)
-    //    {
-    //        pv.Controller = PhotonNetwork.MasterClient;
-    //    }
-    //    if (PV.IsMine)
-    //    {
-    //        Debug.LogWarning(PhotonNetwork.MasterClient + "mine");
-    //        Debug.LogWarning("leave" + otherPlayer.NickName + "mine");
-    //        Debug.LogWarning(otherPlayer.IsMasterClient + "mine");
-    //    }
-    //    Debug.LogWarning(PhotonNetwork.MasterClient);
-    //    Debug.LogWarning("leave" + otherPlayer.NickName);
-    //    Debug.LogWarning(otherPlayer.IsMasterClient);
-    //} 
+    private void FixedUpdate()
+    {
+        if (!PV.IsMine && FirstPersonController.Instance != null)
+        {
+            Stats.transform.LookAt(FirstPersonController.Instance.cam);
+            Stats.transform.localRotation = new Quaternion(Stats.transform.localRotation.x, 0, Stats.transform.localRotation.z, 0);
+        }
+    }
 }

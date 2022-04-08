@@ -16,7 +16,7 @@ public class resource : MonoBehaviour
     [System.Serializable]
     public class TreeInfo
     {
-        [System.Serializable] public enum DropDown { tree, stone }
+        [System.Serializable] public enum DropDown { tree, stone, enemy }
 
         [SerializeField] public DropDown type;
         public int ToolLvl;
@@ -24,18 +24,25 @@ public class resource : MonoBehaviour
         public int stage = 0;
         public GameObject[] stages;
     }
-    private PhotonView PV;
+    [HideInInspector] public PhotonView PV;
     private void Start()
     {
-        colliderPos = GetComponent<BoxCollider>().center.y;
-        PV = GetComponent<PhotonView>();
-        if (treeInfo.stages.Length > 1)
+        if (treeInfo.type == TreeInfo.DropDown.enemy)
         {
-            for (int i = 1; i < treeInfo.stages.Length; i++)
-            {
-                treeInfo.stages[i].SetActive(false);
-            }
+            PV = GetComponent<PhotonView>();
         }
+        else
+        {
+            colliderPos = GetComponent<BoxCollider>().center.y;
+            PV = GetComponent<PhotonView>();
+            if (treeInfo.stages.Length > 1)
+            {
+                for (int i = 1; i < treeInfo.stages.Length; i++)
+                {
+                    treeInfo.stages[i].SetActive(false);
+                }
+            }
+        } 
     }
     public void felling(int lvl)
     {

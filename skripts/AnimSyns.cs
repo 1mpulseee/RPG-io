@@ -7,7 +7,7 @@ public class AnimSyns : MonoBehaviour
 {
     PhotonView PV;
     Animator animator;
-    void Start()
+    void Awake()
     {
         PV = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();

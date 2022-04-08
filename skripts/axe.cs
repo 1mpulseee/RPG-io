@@ -14,6 +14,8 @@ public class axe : MonoBehaviour
     private bool IsAttack = false;
     private void OnTriggerEnter(Collider other)
     {
+        if (FirstPersonController.Instance == null)
+            return;
         IsAttack = FirstPersonController.Instance.IsAttack;
         if (IsAttack)
         {
@@ -37,6 +39,13 @@ public class axe : MonoBehaviour
                 }
                 other.GetComponentInParent<resource>().ready = false;
                 other.GetComponentInParent<resource>().FixAttack();
+            }
+            if (other.CompareTag("Player"))
+            {
+                if (GetComponentInParent<PlayerStats>().pv.IsMine)
+                {
+                    other.GetComponent<PlayerStats>().ChangeHealth();
+                }
             }
         }
     }

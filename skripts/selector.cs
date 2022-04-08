@@ -11,12 +11,20 @@ public class selector : MonoBehaviour
         {
             main.GetObj(other.gameObject);
         }
+        if (other.tag == "Player")
+        {
+            main.GetEnemy(other.gameObject);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "tree")
         {
             main.DelObj(other.gameObject);
+        }
+        if (other.tag == "Player")
+        {
+            main.DelEnemy(other.gameObject);
         }
     }
 }

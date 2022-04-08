@@ -96,6 +96,7 @@ MonoBehaviour:
   resourceRecoveryTime: 90
   effect: {fileID: 3108527273146925328}
   sound: {fileID: 3108527273785947607}
+  PV: {fileID: 0}
 --- !u!65 &3108527273785947604
 BoxCollider:
   m_ObjectHideFlags: 0

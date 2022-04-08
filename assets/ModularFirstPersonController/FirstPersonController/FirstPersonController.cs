@@ -23,6 +23,7 @@ public class FirstPersonController : MonoBehaviour
     public float coolDown = 2f;
     public Transform modules;
     public List<GameObject> objs;
+    public List<GameObject> enemys;
     private Transform selector;
     public GameObject selectorP;
     public float camH;
@@ -54,6 +55,7 @@ public class FirstPersonController : MonoBehaviour
     private bool isWalking = false;
     //Singleton
     public static FirstPersonController Instance;
+    public Transform cam;
     #region Head Bob
 
     public bool enableHeadBob = true;
@@ -158,10 +160,13 @@ public class FirstPersonController : MonoBehaviour
             }
         }
         modules.transform.position = transform.position + new Vector3(0, camH, 0);
-        if (objs.Count != 0)
+        if (objs.Count != 0 || enemys.Count != 0)
         {
             GameObject s = null;
-            s = objs[0];
+            if (objs.Count != 0)
+            {
+                s = objs[0];
+            }
             if (objs.Count != 1)
             {
                 for (int i = 1; i < objs.Count; i++)
@@ -172,6 +177,21 @@ public class FirstPersonController : MonoBehaviour
                     }
                 }
             }
+            if (enemys.Count != 0)
+            {
+                s = enemys[0];
+            }
+            if (enemys.Count != 1)
+            {
+                for (int i = 1; i < enemys.Count; i++)
+                {
+                    if (Vector3.Distance(transform.position, s.transform.position) > Vector3.Distance(transform.position, enemys[i].transform.position))
+                    {
+                        s = enemys[i];
+                    }
+                }
+            }
+
             selector.transform.position = s.transform.position;
             var dir = transform.position - s.transform.position;
             Vector3 newDir = Vector3.RotateTowards(transform.forward, (s.transform.position - transform.position + new Vector3(0, .5f, 0)), 10, 0.0F);
@@ -179,7 +199,7 @@ public class FirstPersonController : MonoBehaviour
             if (time > coolDown)
             {
                 time = 0;
-                if (s.GetComponent<resource>().treeInfo.type == resource.TreeInfo.DropDown.tree)
+                if (s.GetComponent<resource>().treeInfo.type == resource.TreeInfo.DropDown.tree || s.GetComponent<resource>().treeInfo.type == resource.TreeInfo.DropDown.enemy)
                 {
                     for (int i = 0; i < axes.Length; i++)
                     {
@@ -219,6 +239,14 @@ public class FirstPersonController : MonoBehaviour
     public void DelObj(GameObject obj)
     {
         objs.Remove(obj);
+    }
+    public void GetEnemy(GameObject obj)
+    {
+        enemys.Add(obj);
+    }
+    public void DelEnemy(GameObject obj)
+    {
+        enemys.Remove(obj);
     }
 
     //эти 2 метода вызываются через анимации

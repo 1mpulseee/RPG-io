@@ -66,6 +66,7 @@ MonoBehaviour:
   resourceRecoveryTime: 120
   effect: {fileID: 6896000267892686340}
   sound: {fileID: 6896000268078463175}
+  PV: {fileID: 0}
 --- !u!82 &6896000268078463175
 AudioSource:
   m_ObjectHideFlags: 0

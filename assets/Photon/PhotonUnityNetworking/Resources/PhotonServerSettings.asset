@@ -46,6 +46,12 @@ MonoBehaviour:
   - SetInfo
   - SetAnimTrigger
   - SetAnimTriggerRPC
+  - SetLVL
+  - SetName
+  - UpdHealth
+  - Upd
+  - ChangeHealthRPC
+  - KillMe
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

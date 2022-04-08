@@ -3,14 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Photon.Pun;
 
 public class PlayerStats : MonoBehaviour
 {
-    public Animator HpAnim;
+    public Transform HpBar;
+    public TextMesh PlayerName;
+    public TextMesh LvlTextPro;
+    public Text LvlText;
+    
+    
     public Slider healthBar;
     public Slider ExpSlider;
 
     private float maxHealth = 0f;
+    [HideInInspector] public PhotonView pv;
     public float CurrentHealth
     {
         set
@@ -29,16 +37,17 @@ public class PlayerStats : MonoBehaviour
         set
         {
             exp = value;
-            UpdateSliders();
+            if (pv.IsMine)
+            {
+                UpdateSliders();
+            }
         }
         get { return exp; }
     }
-    
-    
     private float exp;
     public float expToLevel = 100f;
-    
-    public int level = 0;
+
+    public int level;
     
     public float speed;
     public float damage;
@@ -56,8 +65,13 @@ public class PlayerStats : MonoBehaviour
     public LvlParametrs[] lvlParametrs;
     void Start()
     {
+        pv = GetComponent<PhotonView>();        
         UpdateParametrs(0);
         InvokeRepeating("Regeneration", 1, .25f);
+        InvokeRepeating("ChUpd", 1, .5f);
+        pv.RPC("SetName", RpcTarget.All);
+
+        LvlText.text = level.ToString();
     }
     public void Regeneration()
     {
@@ -82,8 +96,40 @@ public class PlayerStats : MonoBehaviour
         {
             level++;
             Exp = 0;
-            UpdateParametrs(level);
+            LvlText.text = level.ToString();            
         }
+    }
+    [PunRPC]
+    public void SetName()
+    {
+        PlayerName.text = PhotonNetwork.NickName;
+    }    
+    public void ChUpd()
+    {
+        if (pv.IsMine)
+        {
+            pv.RPC("Upd", RpcTarget.All, maxHealth, currentHealth, level);
+        }
+    }
+    [PunRPC]
+    public void Upd(float max, float current, int lvl)
+    {
+        HpBar.transform.localScale = new Vector3(current / max * 100, 10, 10);
+        LvlTextPro.text = lvl.ToString();          
+    }
+    [PunRPC]
+    public void KillMe()
+    {
+
+    }
+    [PunRPC]
+    public void ChangeHealthRPC(float count)
+    {
+        currentHealth -= count;
+    }
+    public void ChangeHealth()
+    {
+        pv.RPC("ChangeHealthRPC", RpcTarget.All, lvlParametrs[level].damage);
     }
     public void UpdateParametrs(int lvl)
     {
