@@ -98,6 +98,10 @@ public class PlayerStats : MonoBehaviour
             Exp = 0;
             LvlText.text = level.ToString();            
         }
+        if (currentHealth <= 0)
+        {
+            GameManager.DestroyPlayer();
+        }
     }
     [PunRPC]
     public void SetName()

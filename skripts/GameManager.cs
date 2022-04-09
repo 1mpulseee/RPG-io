@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
     public Text text;
     public float MinSpawnHight;
     public static GameManager Instance { get; private set; } // static singleton
-
+    public static GameObject Player;
+    public static PhotonView pv;
     private void Awake()
     {
         if (Instance == null) { Instance = this; }
         else { Destroy(gameObject); }
+        pv = GetComponent<PhotonView>();
     }
     public void UpdateLoadingScreen(int procent)
     {
@@ -37,10 +39,19 @@ public class GameManager : MonoBehaviour
                 float y = terrainData.GetHeight(z, x);
                 if (y > MinSpawnHight)
                 {
-                    PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(z * 1000 / 512, y + 1, x * 1000 / 512), transform.rotation);
+                    Player = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(z * 1000 / 512, y + 1, x * 1000 / 512), transform.rotation);
                     return;
                 }
             }
         } 
+    }
+    public static void DestroyPlayer()
+    {
+        pv.RPC("DestroyPlayerRPC", RpcTarget.All, Player.GetInstanceID());
+    }
+    [PunRPC]
+    public void DestroyPlayerRPC(int player)
+    {
+        
     }
 }
