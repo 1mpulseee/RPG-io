@@ -162,6 +162,22 @@ public class FirstPersonController : MonoBehaviour
         modules.transform.position = transform.position + new Vector3(0, camH, 0);
         if (objs.Count != 0 || enemys.Count != 0)
         {
+            for (int i = 0; i < objs.Count; i++)
+            {
+                if (objs[i] == null)
+                {
+                    objs.RemoveAt(i);
+                    return;
+                }
+            }
+            for (int i = 0; i < enemys.Count; i++)
+            {
+                if (enemys[i] == null)
+                {
+                    enemys.RemoveAt(i);
+                    return;
+                }
+            }
             GameObject s = null;
             if (objs.Count != 0)
             {

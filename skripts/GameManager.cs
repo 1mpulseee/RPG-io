@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject PlayerPrefab;
     public GameObject cam;
@@ -12,7 +13,6 @@ public class GameManager : MonoBehaviour
     public Text text;
     public float MinSpawnHight;
     public static GameManager Instance { get; private set; } // static singleton
-    public static GameObject Player;
     public static PhotonView pv;
     private void Awake()
     {
@@ -39,19 +39,10 @@ public class GameManager : MonoBehaviour
                 float y = terrainData.GetHeight(z, x);
                 if (y > MinSpawnHight)
                 {
-                    Player = PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(z * 1000 / 512, y + 1, x * 1000 / 512), transform.rotation);
+                    PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(z * 1000 / 512, y + 1, x * 1000 / 512), transform.rotation);
                     return;
                 }
             }
         } 
-    }
-    public static void DestroyPlayer()
-    {
-        pv.RPC("DestroyPlayerRPC", RpcTarget.All, Player.GetInstanceID());
-    }
-    [PunRPC]
-    public void DestroyPlayerRPC(int player)
-    {
-        
     }
 }

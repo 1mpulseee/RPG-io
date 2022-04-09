@@ -8,6 +8,8 @@ using Photon.Pun;
 
 public class PlayerStats : MonoBehaviour
 {
+    [HideInInspector] public GameManager GM;
+
     public Transform HpBar;
     public TextMesh PlayerName;
     public TextMesh LvlTextPro;
@@ -98,9 +100,14 @@ public class PlayerStats : MonoBehaviour
             Exp = 0;
             LvlText.text = level.ToString();            
         }
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && pv.IsMine)
         {
-            GameManager.DestroyPlayer();
+            //if (GM = null)
+            //{
+            //    GM = FindObjectOfType<GameManager>();
+            //}
+            //GM.DestroyPlayer();
+            PhotonNetwork.Destroy(gameObject);
         }
     }
     [PunRPC]
@@ -119,7 +126,8 @@ public class PlayerStats : MonoBehaviour
     public void Upd(float max, float current, int lvl)
     {
         HpBar.transform.localScale = new Vector3(current / max * 100, 10, 10);
-        LvlTextPro.text = lvl.ToString();          
+        LvlTextPro.text = lvl.ToString();
+        UpdateSliders();
     }
     [PunRPC]
     public void KillMe()

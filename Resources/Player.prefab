@@ -2051,6 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163ca9a4a74125849a323a94c4e8f335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GM: {fileID: 0}
   HpBar: {fileID: 543450653680683218}
   PlayerName: {fileID: 436631007}
   LvlTextPro: {fileID: 278293792}

@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class networkManager : MonoBehaviourPunCallbacks
+public class networkManager : MonoBehaviour
 {
     private PhotonView PV;
     public FirstPersonController fps;
