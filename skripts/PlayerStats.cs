@@ -65,8 +65,14 @@ public class PlayerStats : MonoBehaviour
         public float Regenerate;
     }
     public LvlParametrs[] lvlParametrs;
+
+    private FirstPersonController fps;
+    private Bot bot;
     void Start()
     {
+        fps = GetComponent<FirstPersonController>();
+        bot = GetComponent<Bot>();
+
         pv = GetComponent<PhotonView>();        
         UpdateParametrs(0);
         InvokeRepeating("Regeneration", 1, .25f);
@@ -159,6 +165,16 @@ public class PlayerStats : MonoBehaviour
         healthBar.value = CurrentHealth;
         ExpSlider.maxValue = expToLevel;
         ExpSlider.value = Exp;
+    }
+    public void startAttack()
+    {
+        try { bot.IsAttack = true; } catch { }
+        try { fps.IsAttack = true; } catch { }
+    }
+    public void stopAttack()
+    {
+        try { bot.IsAttack = false; } catch { }
+        try { fps.IsAttack = false; } catch { }
     }
 #if UNITY_EDITOR
     [ContextMenu("SetLvl")]

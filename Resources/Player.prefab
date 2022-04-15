@@ -4412,6 +4412,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 7
     lvl: 3
+  IsAttack: 0
 --- !u!1001 &522076365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4523,6 +4524,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 4
     lvl: 2
+  IsAttack: 0
 --- !u!1001 &724121398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4634,6 +4636,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 7
     lvl: 3
+  IsAttack: 0
 --- !u!1001 &1257645566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4745,6 +4748,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 10
     lvl: 4
+  IsAttack: 0
 --- !u!1001 &1448740885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4942,6 +4946,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 2
     lvl: 1
+  IsAttack: 0
 --- !u!1001 &1505709800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5053,6 +5058,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 4
     lvl: 2
+  IsAttack: 0
 --- !u!1001 &1626566116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5168,6 +5174,7 @@ MonoBehaviour:
   axeParamerts:
     damage: 10
     lvl: 4
+  IsAttack: 0
 --- !u!1001 &6671328692902994112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5279,3 +5286,4 @@ MonoBehaviour:
   axeParamerts:
     damage: 2
     lvl: 1
+  IsAttack: 0

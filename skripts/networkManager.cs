@@ -12,6 +12,7 @@ public class networkManager : MonoBehaviour
     public GameObject Stats;
     private void Awake()
     {
+        transform.parent = Manager.instance.transform;
         PV = GetComponent<PhotonView>();
         if (!PV.IsMine)
         {

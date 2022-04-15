@@ -11,12 +11,16 @@ public class axe : MonoBehaviour
         public int damage;
         public int lvl;
     }
-    private bool IsAttack = false;
+    public bool IsAttack = false;
     private void OnTriggerEnter(Collider other)
     {
         if (FirstPersonController.Instance == null)
             return;
         IsAttack = FirstPersonController.Instance.IsAttack;
+        try
+        {
+            IsAttack = GetComponentInParent<Bot>().IsAttack;
+        } catch{}
         if (IsAttack)
         {
             if (other.CompareTag("tree"))
@@ -40,7 +44,7 @@ public class axe : MonoBehaviour
                 other.GetComponentInParent<resource>().ready = false;
                 other.GetComponentInParent<resource>().FixAttack();
             }
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") || other.CompareTag("Bot"))
             {
                 if (GetComponentInParent<PlayerStats>().pv.IsMine)
                 {

@@ -45,9 +45,6 @@ public class TerrainGenerator : MonoBehaviour
     public List<int> ColorGenMix;
     private int HeightGen = 0;
 
-
-    
-
     public NavMeshSurface[] surfaces;
     public static TerrainGenerator Instance { get; private set; } // static singleton
 

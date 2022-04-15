@@ -265,16 +265,6 @@ public class FirstPersonController : MonoBehaviour
         enemys.Remove(obj);
     }
 
-    //эти 2 метода вызываются через анимации
-    public void startAttack()
-    {
-        IsAttack = true;
-    }
-    public void stopAttack()
-    {
-        IsAttack = false;
-    }
-
     private void HeadBob()
     {
         if(isWalking)

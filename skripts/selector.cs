@@ -9,7 +9,8 @@ public class selector : MonoBehaviour
     {
         if (other.tag == "tree")
         {
-            main.GetObj(other.gameObject);
+            try{ main.GetObj(other.gameObject); } catch { }
+            try{ GetComponent<Bot>().objs.Add(other.gameObject); } catch { }
         }
         if (other.tag == "Player")
         {
@@ -20,7 +21,9 @@ public class selector : MonoBehaviour
     {
         if (other.tag == "tree")
         {
-            main.DelObj(other.gameObject);
+            try { main.DelObj(other.gameObject); } catch { }
+            try { GetComponent<Bot>().objs.Remove(other.gameObject); } catch { }
+            
         }
         if (other.tag == "Player")
         {

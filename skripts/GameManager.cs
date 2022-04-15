@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public Transform Players;
     [SerializeField] GameObject PlayerPrefab;
     public GameObject cam;
     public Image LoadImg;

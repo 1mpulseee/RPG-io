@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec048a3c903494581c8b5f3886b39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
   TerrainMain: {fileID: 100298527}
   size: 513
   BiomeGen:
@@ -457,6 +458,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431771601}
   m_CullTransparentMesh: 1
+--- !u!1 &435683100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435683101}
+  - component: {fileID: 435683102}
+  m_Layer: 0
+  m_Name: players
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &435683101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435683100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03751397, y: 2.2642004, z: 0.5111485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435683102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435683100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050bb737f0fe7d4488f904bd773132c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayers: 12
+  Bot: {fileID: 3476194960026196451, guid: a55b8a5f9f0b7a842893717a0f0f3faa, type: 3}
+  Players: {fileID: 435683101}
+  players: []
 --- !u!1 &531885266
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec048a3c903494581c8b5f3886b39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
   TerrainMain: {fileID: 0}
   size: 513
   BiomeGen: []
@@ -1188,6 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c512761fe31039d48a1974be18cf8948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Players: {fileID: 435683101}
   PlayerPrefab: {fileID: 4372922987805608982, guid: a487cd3bfbadf8d49910134817a2b11e, type: 3}
   cam: {fileID: 1078154872}
   LoadImg: {fileID: 431771603}
