@@ -1721,7 +1721,7 @@ Transform:
   m_GameObject: {fileID: 3476194960026196451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.182, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4000757952209925743}
   - {fileID: 6587117270772061626}
@@ -1802,6 +1802,7 @@ MonoBehaviour:
   - {fileID: 9054643253839800107}
   - {fileID: 635792833559728273}
   - {fileID: 648013347284552069}
+  - {fileID: 2150133346630002703}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1894,6 +1895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163ca9a4a74125849a323a94c4e8f335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
+  Score: 0
   GM: {fileID: 0}
   HpBar: {fileID: 799648223609298215}
   PlayerName: {fileID: 905877390890115114}
@@ -1913,77 +1916,252 @@ MonoBehaviour:
     Exp: 50
     speed: 6
     damage: 20
-    Regenerate: 1.5
-  - Health: 120
-    Exp: 68
+    Regenerate: 1
+  - Health: 110
+    Exp: 42
     speed: 5.7
-    damage: 24
-    Regenerate: 1.77
-  - Health: 144
-    Exp: 92
+    damage: 19
+    Regenerate: 1.05
+  - Health: 121
+    Exp: 36
     speed: 5.41
-    damage: 28
-    Regenerate: 2.09
-  - Health: 173
-    Exp: 124
+    damage: 18
+    Regenerate: 1.1
+  - Health: 133
+    Exp: 31
     speed: 5.14
-    damage: 33
-    Regenerate: 2.47
-  - Health: 208
-    Exp: 167
+    damage: 17
+    Regenerate: 1.15
+  - Health: 146
+    Exp: 26
     speed: 4.88
-    damage: 39
-    Regenerate: 2.91
-  - Health: 250
-    Exp: 225
+    damage: 16
+    Regenerate: 1.21
+  - Health: 161
+    Exp: 22
     speed: 4.64
-    damage: 46
-    Regenerate: 3.43
-  - Health: 300
-    Exp: 304
+    damage: 15
+    Regenerate: 1.27
+  - Health: 177
+    Exp: 19
     speed: 4.41
-    damage: 54
-    Regenerate: 4.05
-  - Health: 360
-    Exp: 410
+    damage: 14
+    Regenerate: 1.33
+  - Health: 195
+    Exp: 16
     speed: 4.19
-    damage: 64
-    Regenerate: 4.78
-  - Health: 432
-    Exp: 554
+    damage: 13
+    Regenerate: 1.4
+  - Health: 214
+    Exp: 14
     speed: 3.98
-    damage: 76
-    Regenerate: 5.64
-  - Health: 518
-    Exp: 748
+    damage: 12
+    Regenerate: 1.47
+  - Health: 235
+    Exp: 12
     speed: 3.78
-    damage: 90
-    Regenerate: 6.66
-  - Health: 622
-    Exp: 1010
+    damage: 11
+    Regenerate: 1.54
+  - Health: 258
+    Exp: 10
     speed: 3.59
-    damage: 106
-    Regenerate: 7.86
-  - Health: 746
-    Exp: 1364
+    damage: 10
+    Regenerate: 1.62
+  - Health: 284
+    Exp: 8
     speed: 3.41
-    damage: 125
-    Regenerate: 9.27
-  - Health: 895
-    Exp: 1841
+    damage: 10
+    Regenerate: 1.7
+  - Health: 312
+    Exp: 7
     speed: 3.24
-    damage: 148
-    Regenerate: 10.94
-  - Health: 1074
-    Exp: 2485
+    damage: 10
+    Regenerate: 1.78
+  - Health: 343
+    Exp: 6
     speed: 3.08
-    damage: 175
-    Regenerate: 12.91
-  - Health: 1289
-    Exp: 3355
+    damage: 10
+    Regenerate: 1.87
+  - Health: 377
+    Exp: 5
     speed: 2.93
-    damage: 206
-    Regenerate: 15.23
+    damage: 10
+    Regenerate: 1.96
+  - Health: 415
+    Exp: 4
+    speed: 2.78
+    damage: 10
+    Regenerate: 2.06
+  - Health: 456
+    Exp: 3
+    speed: 2.64
+    damage: 10
+    Regenerate: 2.16
+  - Health: 502
+    Exp: 3
+    speed: 2.51
+    damage: 10
+    Regenerate: 2.27
+  - Health: 552
+    Exp: 3
+    speed: 2.38
+    damage: 10
+    Regenerate: 2.38
+  - Health: 607
+    Exp: 3
+    speed: 2.26
+    damage: 10
+    Regenerate: 2.5
+  - Health: 668
+    Exp: 3
+    speed: 2.15
+    damage: 10
+    Regenerate: 2.62
+  - Health: 735
+    Exp: 3
+    speed: 2.04
+    damage: 10
+    Regenerate: 2.75
+  - Health: 808
+    Exp: 3
+    speed: 1.94
+    damage: 10
+    Regenerate: 2.89
+  - Health: 889
+    Exp: 3
+    speed: 1.84
+    damage: 10
+    Regenerate: 3.03
+  - Health: 978
+    Exp: 3
+    speed: 1.75
+    damage: 10
+    Regenerate: 3.18
+  - Health: 1076
+    Exp: 3
+    speed: 1.66
+    damage: 10
+    Regenerate: 3.34
+  - Health: 1184
+    Exp: 3
+    speed: 1.58
+    damage: 10
+    Regenerate: 3.51
+  - Health: 1302
+    Exp: 3
+    speed: 1.5
+    damage: 10
+    Regenerate: 3.69
+  - Health: 1432
+    Exp: 3
+    speed: 1.42
+    damage: 10
+    Regenerate: 3.87
+  - Health: 1575
+    Exp: 3
+    speed: 1.35
+    damage: 10
+    Regenerate: 4.06
+  - Health: 1732
+    Exp: 3
+    speed: 1.28
+    damage: 10
+    Regenerate: 4.26
+  - Health: 1905
+    Exp: 3
+    speed: 1.22
+    damage: 10
+    Regenerate: 4.47
+  - Health: 2096
+    Exp: 3
+    speed: 1.16
+    damage: 10
+    Regenerate: 4.69
+  - Health: 2306
+    Exp: 3
+    speed: 1.1
+    damage: 10
+    Regenerate: 4.92
+  - Health: 2537
+    Exp: 3
+    speed: 1.04
+    damage: 10
+    Regenerate: 5.17
+  - Health: 2791
+    Exp: 3
+    speed: 0.99
+    damage: 10
+    Regenerate: 5.43
+  - Health: 3070
+    Exp: 3
+    speed: 0.94
+    damage: 10
+    Regenerate: 5.7
+  - Health: 3377
+    Exp: 3
+    speed: 0.89
+    damage: 10
+    Regenerate: 5.98
+  - Health: 3715
+    Exp: 3
+    speed: 0.85
+    damage: 10
+    Regenerate: 6.28
+  - Health: 4086
+    Exp: 3
+    speed: 0.81
+    damage: 10
+    Regenerate: 6.59
+  - Health: 4495
+    Exp: 3
+    speed: 0.77
+    damage: 10
+    Regenerate: 6.92
+  - Health: 4944
+    Exp: 3
+    speed: 0.73
+    damage: 10
+    Regenerate: 7.27
+  - Health: 5438
+    Exp: 3
+    speed: 0.69
+    damage: 10
+    Regenerate: 7.63
+  - Health: 5982
+    Exp: 3
+    speed: 0.66
+    damage: 10
+    Regenerate: 8.01
+  - Health: 6580
+    Exp: 3
+    speed: 0.63
+    damage: 10
+    Regenerate: 8.41
+  - Health: 7238
+    Exp: 3
+    speed: 0.6
+    damage: 10
+    Regenerate: 8.83
+  - Health: 7962
+    Exp: 3
+    speed: 0.57
+    damage: 10
+    Regenerate: 9.27
+  - Health: 8758
+    Exp: 3
+    speed: 0.54
+    damage: 10
+    Regenerate: 9.73
+  - Health: 9634
+    Exp: 3
+    speed: 0.51
+    damage: 10
+    Regenerate: 10.22
+  - Health: 10597
+    Exp: 3
+    speed: 0.48
+    damage: 10
+    Regenerate: 10.73
 --- !u!114 &6309751844526588097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,7 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7de8de57dd8c54c89d6772701f3c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDis: 1.25
+  attackDis: 4
   objs: []
   enemys: []
   AxeLvl: 1
@@ -2041,10 +2219,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 12.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

@@ -2,6 +2,8 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 
 public class Manager : MonoBehaviour
 {
@@ -26,8 +28,13 @@ public class Manager : MonoBehaviour
     }
     private void Start()
     {
-        InvokeRepeating("AddPlayer", 5, 5);
+        InvokeRepeating("AddPlayer", 1, 1);
+        foreach (var item in playerList.GetComponentsInChildren<Text>())
+        {
+            item.text = "";
+        }
     }
+    public Transform playerList;
     public void AddPlayer()
     {
         players = new List<GameObject>();
@@ -45,6 +52,16 @@ public class Manager : MonoBehaviour
         {
             players.Add(player[i]);
         }
+
+        GameObject[] top = players
+            .OrderByDescending(x => x.GetComponent<PlayerStats>().Score)
+            .Take(5)
+            .ToArray();
+        for (int i = 0; i < top.Length; i++)
+        {
+            playerList.GetChild(i).GetComponent<Text>().text = (i + 1) + ". " + top[i].GetComponent<PlayerStats>().PlayerName.text + " - " + top[i].GetComponent<PlayerStats>().Score.ToString();
+        }
+
         int[,] biome = TerrainGenerator.Instance.Biomes;
         int size = 512;
         for (int i = players.Count; i < maxPlayers; i++)
@@ -53,7 +70,7 @@ public class Manager : MonoBehaviour
             {
                 int x = Random.Range(0, size);
                 int z = Random.Range(0, size);
-                if (biome[x, z] == 0)
+                if (biome[x, z] == 0 || biome[x, z] == 1)
                 {
                     TerrainData terrainData = TerrainGenerator.Instance.TerrainMain.terrainData;
                     float y = terrainData.GetHeight(z, x);

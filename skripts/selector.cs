@@ -14,7 +14,11 @@ public class selector : MonoBehaviour
         }
         if (other.tag == "Player")
         {
-            main.GetEnemy(other.gameObject);
+            try { main.GetEnemy(other.gameObject); } catch { }
+        }
+        if (other.tag == "Bot")
+        {
+            try { main.GetEnemy(other.gameObject); } catch { }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -23,11 +27,14 @@ public class selector : MonoBehaviour
         {
             try { main.DelObj(other.gameObject); } catch { }
             try { GetComponent<Bot>().objs.Remove(other.gameObject); } catch { }
-            
         }
         if (other.tag == "Player")
         {
-            main.DelEnemy(other.gameObject);
+            try { main.DelEnemy(other.gameObject); } catch { }
+        }
+        if (other.tag == "Bot")
+        {
+            try { main.DelEnemy(other.gameObject); } catch { }
         }
     }
 }

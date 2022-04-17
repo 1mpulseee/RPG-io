@@ -6,8 +6,10 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IPunObservable
 {
+    public bool isPlayer;
+    public int Score;
     [HideInInspector] public GameManager GM;
 
     public Transform HpBar;
@@ -77,9 +79,23 @@ public class PlayerStats : MonoBehaviour
         UpdateParametrs(0);
         InvokeRepeating("Regeneration", 1, .25f);
         InvokeRepeating("ChUpd", 1, .5f);
+        InvokeRepeating("addScore", 1, 1);
         pv.RPC("SetName", RpcTarget.All);
 
         LvlText.text = level.ToString();
+    }
+    public void addScore()
+    {
+        if (isPlayer)
+        {
+            Score += UnityEngine.Random.Range(0, 2);
+        }
+        else
+        {
+            exp += UnityEngine.Random.Range(0, 5);
+            Score += UnityEngine.Random.Range(0, 4);
+            WoodCount += UnityEngine.Random.Range(0, 1f);
+        }
     }
     public void Regeneration()
     {
@@ -119,7 +135,14 @@ public class PlayerStats : MonoBehaviour
     [PunRPC]
     public void SetName()
     {
-        PlayerName.text = PhotonNetwork.NickName;
+        if (isPlayer)
+        {
+            PlayerName.text = PhotonNetwork.NickName;
+        }
+        else
+        {
+            PlayerName.text = "Bot" + UnityEngine.Random.Range(0, 1000).ToString();
+        }
     }    
     public void ChUpd()
     {
@@ -148,6 +171,10 @@ public class PlayerStats : MonoBehaviour
     public void ChangeHealth()
     {
         pv.RPC("ChangeHealthRPC", RpcTarget.All, lvlParametrs[level].damage);
+    }
+    public void ChangeHealthCount(int count)
+    {
+        pv.RPC("ChangeHealthRPC", RpcTarget.All, (float)count);
     }
     public void UpdateParametrs(int lvl)
     {
@@ -189,11 +216,12 @@ public class PlayerStats : MonoBehaviour
             float Regen = lvlParametrs[0].Regenerate;
             for (int i = 1; i < lvlParametrs.Length; i++)
             {
-                Regen *= 1.18f;
-                HP *= 1.2f;
-                exp *= 1.35f;
+                Regen *= 1.05f;
+                HP *= 1.1f;
+                exp *= .85f;
                 speed *= 0.95f;
-                damage *= 1.18f;
+                //damage *= 1.18f;
+                damage *= .95f;
                 Regen = (float)Math.Round((double)Regen, 2);
                 HP = (float)Math.Round((double)HP, 0);
                 exp = (float)Math.Round((double)exp, 0);
@@ -209,6 +237,18 @@ public class PlayerStats : MonoBehaviour
         else
         {
             Debug.LogError("LowLvl");
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(Score);
+        }
+        else
+        {
+            Score = (int)stream.ReceiveNext();
         }
     }
 #endif

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
 public class Bot : MonoBehaviour
 {
+    private Vector3 pos = Vector3.zero;
     public float attackDis;
 
     private NavMeshAgent agent;
@@ -29,18 +31,41 @@ public class Bot : MonoBehaviour
     public float coolDown = 2f;
     public bool IsAttack = false;
 
-    private Rigidbody rb;
     private Animator anim;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         AnimSyns = GetComponent<AnimSyns>();
+        InvokeRepeating("CheckPos", 3, 3);
+    }
+    public void CheckPos()
+    {
+        Vector3 newPos = new Vector3((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+        if (pos == newPos)
+        {
+            playerStats.ChangeHealthCount(10);
+        }
+        pos = newPos;
     }
     private void FixedUpdate()
     {
         enemys = Manager.instance.players;
         time += Time.deltaTime;
+        for (int i = 0; i < enemys.Count; i++)
+        {
+            if (enemys[i] == null)
+            {
+                enemys.RemoveAt(i);
+            }
+        }
+        for (int i = 0; i < objs.Count; i++)
+        {
+            if (objs[i] == null)
+            {
+                objs.RemoveAt(i);
+            }
+        }
         if (objs.Count != 0 || enemys.Count != 0)
         {
             anim.SetBool("run", true);
@@ -104,12 +129,13 @@ public class Bot : MonoBehaviour
             //Debug.Log(Vector3.Distance(transform.position, s.transform.position));
             if (Vector3.Distance(transform.position, s.transform.position) > attackDis)
             {
+                agent.enabled = true;
                 try
                 {
-                    agent.destination = s.transform.position;
+                    agent.destination = (s.transform.position);
                 }
                 catch{ }
-                agent.enabled = true;
+                
                
             }
             else
